@@ -1,4 +1,4 @@
-call plug#begin("~/.vim/plugged")
+call plug#begin('~/.local/share/nvim/plugged')
 " Plugin Section
 Plug 'dracula/vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -162,7 +162,7 @@ noremap  <silent> $ g$
 onoremap <silent> j gj
 onoremap <silent> k gk
 nnoremap ; :
-" close buffer like alt w 
+" close buffer like alt w
 nnoremap <leader>w :bw<CR>
 
 " clean sloppy exit
@@ -428,4 +428,3 @@ let g:NERDCompactSexyComs = 1
 
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
-
