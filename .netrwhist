@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/mrk/Code'
+let g:netrw_dirhist_2='/Users/mrk/Code/javascript-web'
+let g:netrw_dirhist_1='/Users/mrk/Code'
+let g:netrw_dirhist_0='/Users/mrk/Code/git-repositories/hp/src/images'
+let g:netrw_dirhist_9='/Users/mrk/Code/git-repositories/hp/src/pages'
+let g:netrw_dirhist_8='/Users/mrk/Code/git-repositories/hp/src'
+let g:netrw_dirhist_7='/Users/mrk/Code/git-repositories/hp'
+let g:netrw_dirhist_6='/Users/mrk'
+let g:netrw_dirhist_5='/Users/mrk/Code/interview/javascript-concepts'
+let g:netrw_dirhist_4='/Users/mrk/Code/interview'
