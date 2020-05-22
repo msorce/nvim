@@ -4,9 +4,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mhinz/vim-signify'
-Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-commentary'
 Plug 'junegunn/gv.vim'
 Plug 'yggdroot/indentline'
 Plug 'tpope/vim-surround'
@@ -129,7 +129,7 @@ function! ToggleNetrw()
         silent Lexplore
     endif
 endfunction
-nnoremap <leader>b :call ToggleNetrw()<CR>
+" nnoremap <leader>b :call ToggleNetrw()<CR>
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -397,11 +397,6 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " COMMENTING
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
+vmap <leader>/ gc
+nmap <leader>/ gcc
+nnoremap <esc><esc> :noh<return>
