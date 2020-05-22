@@ -11,6 +11,8 @@ Plug 'junegunn/gv.vim'
 Plug 'yggdroot/indentline'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-pairs']
@@ -142,6 +144,12 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" use alt+hjkl to move between split/vsplit panels
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
@@ -400,3 +408,58 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 vmap <leader>/ gc
 nmap <leader>/ gcc
 nnoremap <esc><esc> :noh<return>
+
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
+let g:NERDTreeStatusline = ''
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Toggle
+nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+
+
+
+" " open new split panes to right and below
+" set splitright
+" set splitbelow
+" " start terminal in insert mode
+" au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+" " open terminal on ctrl+n
+" function! OpenTerminal()
+"   split term://top
+"   resize 10
+" endfunction
+" nnoremap <leader>` :call OpenTerminal()<CR>
+" turn terminal to normal mode with escape
+" tnoremap <leader>` <C-\><C-n>
+" Terminal Function
+let g:term_buf = 0
+let g:term_win = 0
+function! TermToggle(height)
+    if win_gotoid(g:term_win)
+        hide
+    else
+        botright new
+        exec "resize " . a:height
+        try
+            exec "buffer " . g:term_buf
+        catch
+            call termopen($SHELL, {"detach": 0})
+            let g:term_buf = bufnr("")
+            set nonumber
+            set norelativenumber
+            set signcolumn=no
+        endtry
+        startinsert!
+        let g:term_win = win_getid()
+    endif
+endfunction
+" Toggle terminal on/off (neovim)
+nnoremap <leader>` :call TermToggle(12)<CR>
+inoremap <leader>` <Esc>:call TermToggle(12)<CR>
+tnoremap <leader>` <C-\><C-n>:call TermToggle(12)<CR>
+
+" Terminal go back to normal mode
+tnoremap  <Esc> <C-\><C-n>
+tnoremap :q! <C-\><C-n>:q!<CR>
