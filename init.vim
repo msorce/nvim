@@ -9,12 +9,15 @@ Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
+Plug 'yggdroot/indentline'
+Plug 'tpope/vim-surround'
 call plug#end()
+
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-pairs']
 "Config Section
 " set leader key
-nnoremap <SPACE> <Nop>
-let mapleader = "\<Space>"
+noremap <Space> <Nop>
+let mapleader = " "
 syntax enable                           " Enables syntax highlighing
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
@@ -33,6 +36,7 @@ set shiftwidth=4                        " Change the number of space characters 
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
+set ignorecase
 set autoindent                          " Good auto indent
 set laststatus=2                        " Always display the status line
 set nu                                  " Line numbers
@@ -189,9 +193,9 @@ let g:fzf_action = {
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-map <C-f> :Files<CR>
-map <leader>b :Buffers<CR>
-nnoremap <leader>g :Rg<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>F :Rg<CR>
+nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>m :Marks<CR>
 
@@ -249,10 +253,10 @@ command! -bang -nargs=* GGrep
             \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 " Change these if you want
-"let g:signify_sign_add               = '+'
-"let g:signify_sign_delete            = '_'
-"let g:signify_sign_delete_first_line = '‾'
-"let g:signify_sign_change            = '~'
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '_'
+let g:signify_sign_delete_first_line = '‾'
+let g:signify_sign_change            = '~'
 
 " I find the numbers disctracting
 "let g:signify_sign_show_count = 0
@@ -260,10 +264,10 @@ command! -bang -nargs=* GGrep
 
 
 " Jump though hunks
-"nmap <leader>gj <plug>(signify-next-hunk)
-"nmap <leader>gk <plug>(signify-prev-hunk)
-"nmap <leader>gJ 9999<leader>gJ
-"nmap <leader>gK 9999<leader>gk
+nmap <leader>gj <plug>(signify-next-hunk)
+nmap <leader>gk <plug>(signify-prev-hunk)
+nmap <leader>gJ 9999<leader>gJ
+nmap <leader>gK 9999<leader>gk
 
 
 " If you like colors instead
@@ -351,8 +355,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>=  <Plug>(coc-format-selected)
+nmap <leader>=  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
