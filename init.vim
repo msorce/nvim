@@ -1,24 +1,24 @@
 call plug#begin('~/.local/share/nvim/plugged')
-" Plugin Section
-Plug 'dracula/vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mhinz/vim-signify'
-Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'junegunn/gv.vim'
-Plug 'yggdroot/indentline'
-Plug 'tpope/vim-surround'
+    Plug 'dracula/vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'mhinz/vim-signify'
+    Plug 'preservim/nerdcommenter'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-rhubarb'
+    Plug 'junegunn/gv.vim'
+    Plug 'yggdroot/indentline'
+    Plug 'tpope/vim-surround'
+    Plug 'vim-airline/vim-airline'
 call plug#end()
 
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-pairs']
 "Config Section
-" set leader key
 noremap <Space> <Nop>
 let mapleader = " "
 syntax enable                           " Enables syntax highlighing
+set shortmess+=c
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
 set encoding=utf-8                      " The encoding displayed
@@ -36,31 +36,30 @@ set shiftwidth=4                        " Change the number of space characters 
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
-set ignorecase
+set ignorecase                          " bleh smart case no work for me bleehhhh
 set autoindent                          " Good auto indent
 set laststatus=2                        " Always display the status line
 set nu                                  " Line numbers
-set background=dark                     " tell vim what the background color looks like
 set showtabline=2                       " Always show tabs
-"set noshowmode                          " We don't need to see things like -- INSERT -- anymore
+set noshowmode                          " We don't need to see things like -- INSERT -- anymore
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set updatetime=100                      " Faster completion
-"set timeoutlen=100                      " By default timeoutlen is 1000 ms
+set timeoutlen=300                      " By default timeoutlen is 1000 ms
 set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set incsearch                           " Show search highlights as you type
-set scrolloff=10
-set number relativenumber
-"set autochdir                          " Your working directory will always be the same as your working directory
-"set cursorline                         " Enable highlighting of the current line
-"set ruler              			          " Show the cursor position all the time
+set scrolloff=10                        " start scrolling before hitting viewport
+set number relativenumber               " hybrid
+set autochdir                           " Your working directory will always be the same as your working directory
 set lazyredraw                          " 🤷🏻‍♂️
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 " use sudo if you forgot to open with permissions
 cmap w!! w !sudo tee %
 
+" theme settings
 colorscheme dracula
+set background=dark                     
 
 augroup numbertoggle
     autocmd!
@@ -69,25 +68,28 @@ augroup numbertoggle
 augroup END
 
 " status line
-function! StatuslineGit()
-    let l:branchname = GitBranch()
-    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
+" set statusline=
+" set statusline+=%#PmenuSel#
+" set statusline+=\ %f
+" set statusline+=\ %m
+" set statusline+=%#LineNr#
+" set statusline+=%=
+" set statusline+=%#CursorColumn#
+" set statusline+=\ %y
+" set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+" set statusline+=\ [%{&fileformat}\]
+" set statusline+=\ %p%%
+" set statusline+=\ %l:%c
+" set statusline+=\
+" enable tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
 
-set statusline=
-set statusline+=%#PmenuSel#
-"set statusline+=%{StatuslineGit()}
-set statusline+=\ %f
-set statusline+=\ %m
-set statusline+=%#LineNr#
-set statusline+=%=
-set statusline+=%#CursorColumn#
-set statusline+=\ %y
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\ [%{&fileformat}\]
-set statusline+=\ %p%%
-set statusline+=\ %l:%c
-set statusline+=\
+set showtabline=2  " Show tabline
+set guioptions-=e  " Don't use GUI tabline
 
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -259,8 +261,8 @@ let g:signify_sign_delete_first_line = '‾'
 let g:signify_sign_change            = '~'
 
 " I find the numbers disctracting
-"let g:signify_sign_show_count = 0
-"let g:signify_sign_show_text = 1
+let g:signify_sign_show_count = 0
+let g:signify_sign_show_text = 1
 
 
 " Jump though hunks
@@ -275,22 +277,7 @@ nmap <leader>gK 9999<leader>gk
 " highlight SignifySignDelete ctermfg=black ctermbg=red    guifg=#ffffff guibg=#ff0000
 " highlight SignifySignChange ctermfg=black ctermbg=yellow guifg=#000000 guibg=#ffff00
 
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
 " Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
