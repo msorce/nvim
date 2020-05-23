@@ -23,6 +23,10 @@ brew install ripgrep
 ```
 
 ## for linux
+-install nodejs
+```
+sudo apt install nodejs
+```
 - get neovim
 ```
 sudo apt-get install neovim
