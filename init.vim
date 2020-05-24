@@ -13,6 +13,14 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ryanoasis/vim-devicons'
+" Syntax Highlighting
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-pairs']
@@ -53,7 +61,7 @@ set clipboard=unnamedplus               " Copy paste between vim and everything 
 set incsearch                           " Show search highlights as you type
 set scrolloff=15                       " start scrolling before hitting viewport
 set number relativenumber               " hybrid
-set autochdir                           " Your working directory will always be the same as your working directory
+"set autochdir                           " Your working directory will always be the same as your working directory
 set lazyredraw                          " 🤷🏻‍♂️
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 " use sudo if you forgot to open with permissions
