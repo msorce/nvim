@@ -13,6 +13,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ryanoasis/vim-devicons'
+Plug 'jiangmiao/auto-pairs'
 " Syntax Highlighting
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
@@ -23,7 +24,7 @@ Plug 'jparise/vim-graphql'
 Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
-let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-pairs']
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 "Config Section
 noremap <Space> <Nop>
 let mapleader = " "
